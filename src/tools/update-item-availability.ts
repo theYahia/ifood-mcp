@@ -3,13 +3,30 @@ import { IfoodClient } from "../client.js";
 
 const client = new IfoodClient();
 
-export const update_item_availabilitySchema = z.object({
-  merchant_id: z.string().describe("Merchant ID"),
-  item_id: z.string().describe("Item ID"),
-  available: z.boolean().describe("Availability"),
+export const updateItemAvailabilitySchema = z.object({
+  merchant_id: z.string().min(1).describe("iFood merchant UUID."),
+  item_id: z.string().min(1).describe("Catalog item UUID."),
+  available: z.boolean().describe("true = item visible on the menu, false = hide it (e.g. out of stock)."),
 });
 
-export async function handleUpdateItemAvailability(params: z.infer<typeof update_item_availabilitySchema>): Promise<string> {
-  const result = await client.request("PUT", `/catalog/v2.0/merchants/${params.merchant_id}/items/${params.item_id}/availability`, { available: params.available });
-  return JSON.stringify(result, null, 2);
+/**
+ * Flip a single menu item's availability. Use for fast "out of stock" toggles
+ * from the kitchen without a full menu edit.
+ *
+ * Endpoint: PATCH /catalog/v2.0/merchants/{merchant_id}/items/{item_id}/status
+ */
+export async function handleUpdateItemAvailability(
+  params: z.infer<typeof updateItemAvailabilitySchema>,
+): Promise<string> {
+  const status = params.available ? "AVAILABLE" : "UNAVAILABLE";
+  const result = await client.request(
+    "PATCH",
+    `/catalog/v2.0/merchants/${encodeURIComponent(params.merchant_id)}/items/${encodeURIComponent(params.item_id)}/status`,
+    { status },
+  );
+  return JSON.stringify(
+    result ?? { ok: true, merchant_id: params.merchant_id, item_id: params.item_id, status },
+    null,
+    2,
+  );
 }
