@@ -1,0 +1,33 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+  "name": "io.github.theYahia/ifood-mcp",
+  "description": "MCP server for iFood — orders, store operations, and catalog management (Brazil).",
+  "version": "1.1.0",
+  "repository": {
+    "url": "https://github.com/theYahia/ifood-mcp",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registry_type": "npm",
+      "registry_base_url": "https://registry.npmjs.org",
+      "identifier": "@theyahia/ifood-mcp",
+      "version": "1.1.0",
+      "transport": { "type": "stdio" },
+      "environment_variables": [
+        {
+          "name": "IFOOD_CLIENT_ID",
+          "description": "iFood OAuth client ID",
+          "is_required": true,
+          "is_secret": true
+        },
+        {
+          "name": "IFOOD_CLIENT_SECRET",
+          "description": "iFood OAuth client secret",
+          "is_required": true,
+          "is_secret": true
+        }
+      ]
+    }
+  ]
+}
