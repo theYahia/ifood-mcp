@@ -1,6 +1,6 @@
-# ifood-mcp
+# iFood MCP — gerencie pedidos, loja e cardápio conversando com uma IA
 
-MCP server for [iFood](https://www.ifood.com.br/) merchant integration (Brazil) — manage orders, the store, and the catalog from any MCP client (Claude, etc.).
+Se você procurava como conectar sua loja do iFood a uma IA, aceitar e despachar pedidos conversando, abrir ou fechar a loja e ajustar o cardápio sem programar, é isto. São 26 ferramentas para pedidos, loja e catálogo, usadas a partir do Claude Desktop, Cursor ou qualquer cliente MCP.
 
 Talks to the iFood **Merchant API** (`merchant-api.ifood.com.br`) using OAuth2 `client_credentials`. One shared, auto-refreshed token is used across all tools.
 
@@ -116,3 +116,4 @@ npm run dev        # tsx src/index.ts
 ## License
 
 MIT
+
