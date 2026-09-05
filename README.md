@@ -117,3 +117,6 @@ npm run dev        # tsx src/index.ts
 
 MIT
 
+---
+
+Telegram: [@vhodvai](https://t.me/vhodvai)
